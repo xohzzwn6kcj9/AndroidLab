@@ -2,6 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.student.sms" >
 
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <!-- 핸드폰으로서의 기본 정보 ACCESS... App이 설치된 유저 폰의 전화번호 SMS발송시 발신자 전화번호로 지정 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 주소록 데이터 ACCESS -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- 폰의 task 정보의 access시 필요
+    lollipop 에서 deprecated. 롤리팝에서는 permission선언하지 않아도 된다.
+    하위 호환성 문제라 여전히 달아주어야 한다. -->
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +28,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".SMSReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
+
+        <activity
+            android:name=".SMSReadActivity"
+            android:label="@string/title_activity_smsread" >
         </activity>
     </application>
 
