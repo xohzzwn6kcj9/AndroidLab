@@ -45,7 +45,7 @@ public class SMSReceiver extends BroadcastReceiver {
                     final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
                     final List<ActivityManager.RunningTaskInfo> rti = am.getRunningTasks(1);
 
-                    boolean isNotify = false;
+                    boolean isNotify = true;
                     String mode = "read";
                     if(rti != null && rti.size()>0){
                         ComponentName topActivity = rti.get(0).topActivity;
@@ -53,8 +53,9 @@ public class SMSReceiver extends BroadcastReceiver {
 
                             MyApplication app = (MyApplication) context.getApplicationContext();
                             String displayPhoneNumber = app.displayPhoneNumber;
+                            Log.d(TAG, "displayPhoneNumber="+displayPhoneNumber);
                             if(displayPhoneNumber != null && displayPhoneNumber.equals(smsAddress)){
-                                isNotify = true;
+                                isNotify = false;
                             }
 
                         }
@@ -74,8 +75,7 @@ public class SMSReceiver extends BroadcastReceiver {
                     Log.d(TAG, "A message inserted to database with id = " + _id);
                     final Cursor cursor = db.query(SmsTable.TABLE_NAME,
                             new String[]{SmsTable.PHONE_NUMBER},
-                            //SmsTable.STATE + " = '0'",
-                            null,
+                            SmsTable.STATE + " = '0'",
                             null,
                             null,
                             null,
@@ -88,7 +88,8 @@ public class SMSReceiver extends BroadcastReceiver {
                             phones.add(cursor.getString(0));
                         }
                     }
-                    db.close();
+                    //db.close();
+                    Log.d(TAG, "isNotify="+isNotify);
                     if(isNotify){
                         final NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
@@ -132,6 +133,7 @@ public class SMSReceiver extends BroadcastReceiver {
                         builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
                         builder.setAutoCancel(true);
                         builder.setOngoing(false);
+                        Log.d(TAG, "sending nodify");
                         nm.notify(0, builder.build());
                     }
                     else{ //isNotify == false
@@ -148,5 +150,6 @@ public class SMSReceiver extends BroadcastReceiver {
                 }
             }
         }
+        Log.d(TAG, "end of onReceive");
     }
 }

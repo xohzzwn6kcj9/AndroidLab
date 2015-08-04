@@ -1,9 +1,15 @@
 package com.example.student.sms;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 public class SMSReadActivity extends AppCompatActivity {
 
@@ -33,5 +39,26 @@ public class SMSReadActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+}
+
+class SMSReadAdapter extends ArrayAdapter<SMSMessage> {
+    Context context;
+    ArrayList<SMSMessage> list;
+
+    public SMSReadAdapter(Context context, int resource, ArrayList<SMSMessage> list) {
+        super(context, resource, list);
+        this.context = context;
+        this.list = list;
+    }
+
+    @Override
+    public int getCount() {
+        return this.list==null ? 0 : list.size();
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return super.getView(position, convertView, parent);
     }
 }
