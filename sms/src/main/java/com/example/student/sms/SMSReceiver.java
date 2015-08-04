@@ -89,7 +89,7 @@ public class SMSReceiver extends BroadcastReceiver {
                         }
                     }
                     //db.close();
-                    Log.d(TAG, "isNotify="+isNotify);
+                    Log.d(TAG, "isNotify=" + isNotify);
                     if(isNotify){
                         final NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
@@ -101,9 +101,10 @@ public class SMSReceiver extends BroadcastReceiver {
                         builder.setContentText(smsAddress + " " + smsBody);
 
                         final Intent newIntent= new Intent(context, SMSReadActivity.class);
-                        newIntent.putExtra("phoneNumber", smsAddress);
+                        newIntent.putExtra(SmsTable.PHONE_NUMBER, smsAddress);
                         newIntent.putExtra("mode", mode);
-                        final PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, newIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        //newIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP );
+                        final PendingIntent pendingIntent = PendingIntent.getActivity(context, 12, newIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                         builder.setContentIntent(pendingIntent);
 
                         if(size>1){
@@ -138,6 +139,7 @@ public class SMSReceiver extends BroadcastReceiver {
                     }
                     else{ //isNotify == false
                         final Intent rIntent = new Intent("com.multi.ACTION_READ_ACTIVITY");
+                        //rIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP );
                         rIntent.putExtra(SmsTable.ID, _id);
                         rIntent.putExtra(SmsTable.DATE, date);
                         rIntent.putExtra(SmsTable.PHONE_NUMBER, smsAddress);

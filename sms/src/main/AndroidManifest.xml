@@ -2,28 +2,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.student.sms" >
 
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <!-- 핸드폰으로서의 기본 정보 ACCESS... App이 설치된 유저 폰의 전화번호 SMS발송시 발신자 전화번호로 지정 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 주소록 데이터 ACCESS -->
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <!-- 폰의 task 정보의 access시 필요
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--
+    폰의 task 정보의 access시 필요
     lollipop 에서 deprecated. 롤리팝에서는 permission선언하지 않아도 된다.
-    하위 호환성 문제라 여전히 달아주어야 한다. -->
-    <uses-permission android:name="android.permission.GET_TASKS"/>
+    하위 호환성 문제라 여전히 달아주어야 한다.
+    -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".MyApplication" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,13 +39,18 @@
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
         <activity
             android:name=".SMSReadActivity"
-            android:label="@string/title_activity_smsread" >
+            android:label="@string/title_activity_smsread"
+            android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name=".SMSWriteActivity"
+            android:label="@string/title_activity_smswrite" >
         </activity>
     </application>
 
