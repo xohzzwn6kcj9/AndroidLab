@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list">
+        <item>Start Chat</item>
+        <item>Friend info</item>
+        <item>Block Friend</item>
+    </string-array>
+
+</resources>

@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -30,7 +31,21 @@ public class SettingPreferences extends PreferenceActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-//-----1 start--------------------------	
+//-----1 start--------------------------
+
+		addPreferencesFromResource(R.xml.settings);
+
+		loginId=(EditTextPreference)findPreference(PreferenceHelper.KEY_LOGIN_ID);
+		nickname=(EditTextPreference)findPreference(PreferenceHelper.KEY_NICKNAME);
+		serverIp=(EditTextPreference)findPreference(PreferenceHelper.KEY_SERVER_IP);
+		serverPort=(EditTextPreference)findPreference(PreferenceHelper.KEY_SERVER_PORT);
+		serverHttpPort=(EditTextPreference)findPreference(PreferenceHelper.KEY_SERVER_HTTP_PORT);
+
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		prefs.registerOnSharedPreferenceChangeListener(ospchlistener);
+		if(!prefs.getString(PreferenceHelper.KEY_LOGIN_ID, "").isEmpty()){
+			loginId.setSummary(prefs.getString(PreferenceHelper.KEY_LOGIN_ID, ""));
+		}
 
 	  //-1 end-------------------------------------
 	    if(!prefs.getString("Nickname", "").equals(""))
@@ -59,6 +74,9 @@ public class SettingPreferences extends PreferenceActivity {
 					myDialog.cancel();
 					Toast.makeText(SettingPreferences.this, "The email already exists.", Toast.LENGTH_SHORT).show();
 				}
+				else{
+					Toast.makeText(SettingPreferences.this, "Unexpected Error.", Toast.LENGTH_SHORT).show();
+				}
 			}
 	    	
 	    };
@@ -69,9 +87,16 @@ public class SettingPreferences extends PreferenceActivity {
 		
 		@Override
 		public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+			Log.e("kkang", "key="+key);
 			if(key.equals("LoginID")) {
+				Log.e("kkang", "login id changed. ");
 				//2 start ----------------------------------------
-
+				if(!prefs.getString(PreferenceHelper.KEY_LOGIN_ID, "").isEmpty()) {
+					loginId.setSummary(prefs.getString(PreferenceHelper.KEY_LOGIN_ID, ""));
+					myDialog = ProgressDialog.show(SettingPreferences.this, "", "wait...");
+					UserSettingThread thread = new UserSettingThread(prefs.getString("LoginID", ""), "", true);
+					thread.start();
+				}
 				//2 end -----------------------------------------
 			} else if (key.equals("Nickname")) {
 
@@ -108,6 +133,13 @@ public class SettingPreferences extends PreferenceActivity {
 		}
 	};
 	//---3 start --------------------------------
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		prefs.unregisterOnSharedPreferenceChangeListener(ospchlistener);
+	}
+
 
 	//---3 end--------------------------------------
 	
@@ -161,6 +193,24 @@ public class SettingPreferences extends PreferenceActivity {
 				temp.put("value", "1");
 				list.add(temp);
 //------------ 3 start ---------------------------------------				
+
+				String result = HttpUtil.sendHttpPost(
+						prefs.getString(PreferenceHelper.KEY_SERVER_IP, ""),
+						prefs.getString(PreferenceHelper.KEY_SERVER_HTTP_PORT, ""),
+						list);
+				Log.d("kkang", "result="+result);
+				if(result.equals("OK")){
+					msg.what=1;
+					handler.sendMessage(msg);
+				}
+				else if(result.equals("EXISTS")){
+					msg.what=2;
+					handler.sendMessage(msg);
+				}
+				else{
+					msg.what=0;
+					handler.sendMessage(msg);
+				}
 
 //--------4 end ------------------------------------------------
 			} catch (Exception e) {

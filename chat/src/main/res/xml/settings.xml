@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="@string/preference_key_login_id"
+        android:title="LoginID"
+        android:summary="edit login id"
+        android:dialogTitle="Email"
+        />
+    <EditTextPreference
+        android:key="@string/preference_key_nickname"
+        android:title="Nickname"
+        android:summary="edit NickName"
+        android:dialogTitle="NickName"
+        />
+    <EditTextPreference
+        android:key="@string/preference_key_server_ip"
+        android:title="ServerIP"
+        android:summary="edit server ip"
+        android:dialogTitle="ServerIP"
+        />
+    <EditTextPreference
+        android:key="@string/preference_key_server_port"
+        android:title="ServerPort"
+        android:summary="edit server Port"
+        android:dialogTitle="ServerPort"
+        />
+    <EditTextPreference
+        android:key="@string/preference_key_server_http_port"
+        android:title="ServerHttpPort"
+        android:summary="edit server HttpPort"
+        android:dialogTitle="ServerHttpPort"
+        />
+
+</PreferenceScreen>

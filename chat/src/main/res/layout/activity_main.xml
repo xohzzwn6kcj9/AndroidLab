@@ -3,16 +3,10 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#858585"
     >
-    <TextView
-        android:id="@+id/check_invite_tv"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30px"
-        android:text="Someone Invite You!!"
-        />
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/main_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         />

@@ -5,4 +5,22 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_check_invite">CheckInviteActivity</string>
     <string name="title_activity_setting_preferences">SettingPreferencesActivity</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_invite">InviteActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_my_status">MyStatusActivity</string>
+
+    <string name="preference_key_login_id">LoginID</string>
+    <string name="preference_key_nickname">Nickname</string>
+    <string name="preference_key_server_ip">ServerIP</string>
+    <string name="preference_key_server_port">ServerPort</string>
+    <string name="preference_key_server_http_port">ServerHttpPort</string>
+
+    <string name="chat_dialog">
+        &lt;b&gt;%1$s&lt;/b&gt;&lt;br&gt;%2$s&lt;br&gt;%3$s
+    </string>
+    <string name="intent_to_service">com.multi.ACTION_TO_SERVICE</string>
+    <string name="intent_to_activity">com.multi.ACTION_TO_ACTIVITY</string>
+
 </resources>
