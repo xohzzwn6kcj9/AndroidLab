@@ -115,41 +115,58 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 ////----------------------------
 //Add1-2	--------------------
+	//chat 데이터 발생후 호출..
+	//isHere : true - Activity에서 발생
+	//false : service에서 넘어온..
+	private void addMessage(String msg, String from, String to,
+							String datetime, boolean isHere){
+		HashMap<String,String> temp=new HashMap<>();
+		temp.put("msg",msg);
+		temp.put("from",from);
+		temp.put("email",email);
+		temp.put("datetime",datetime);
 
-	private void addMessage(String msg, String from, String to, String datetime, boolean isHere){
-		final HashMap<String, String> temp = new HashMap<>();
-		temp.put("msg", msg);
-		temp.put("from", from);
-		temp.put("email", email);
-		temp.put("datetime", datetime);
 		ca.add(temp);
-		if(ca.getCount() > 20){
-			ca.remove(ca.getItem(0));
+		if(ca.getCount()>20){
+			ca.remove(ca.getItem(0));//최대 20개까지만.. 유지하겠다..
 		}
-		lv.setSelection(ca.getCount()-1);
+		lv.setSelection(ca.getCount()-1);//자동 스크롤...
+
 		if(isHere){
-			MyApplication app = (MyApplication) getApplicationContext();
-			boolean isOnline = app.isOnline();
+			//여기서 발생한 거라면 server 전송..
+			MyApplication app=(MyApplication)getApplicationContext();
+			boolean isOnline=app.isOnline();
 			if(isOnline){
-				Intent intent = new Intent(getResources().getString(R.string.intent_to_service));
-				intent.putExtra("from", from);
-				intent.putExtra("to", to);
-				intent.putExtra("message", msg);
+				//service에 데이터 전송.. service가 server에 데이터 write..
+				//activity 가 어떻게 service에 데이터를?
+				Intent intent=new Intent(getResources().getString(
+						R.string.intent_to_service));
+				intent.putExtra("from",from);
+				intent.putExtra("to",to);
+				intent.putExtra("message",msg);
 				sendBroadcast(intent);
-				Log.d("kkang", "activity sendBoroadcast");
-			}
-			else{
-				Toast.makeText(this, "network error", Toast.LENGTH_SHORT).show();
+				Log.d("kkang","activity sendBroadcast");
+
+			}else {
+				Toast t=Toast.makeText(this, "network error...",
+						Toast.LENGTH_SHORT);
+				t.show();
 			}
 		}
+
 	}
-	final BroadcastReceiver chatReceiver = new BroadcastReceiver() {
+
+	//service로 부터 넘어오는 문자열 받기 위해서..
+	BroadcastReceiver chatReceiver=new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Log.d("kkang", "activity onReceive()");
-			if(intent.getStringExtra("from")!=null){
-				addMessage(intent.getStringExtra("msg"), intent.getStringExtra("from"), email,
-						intent.getStringExtra("datetime"), false);
+			Log.d("kkang","activity onReceive()");
+			if(intent.getStringExtra("from") != null){
+				addMessage(intent.getStringExtra("message"),
+						intent.getStringExtra("from"),
+						email,
+						intent.getStringExtra("datetime"),
+						false);
 			}
 		}
 	};
@@ -160,11 +177,11 @@ public class ChatActivity extends Activity implements OnClickListener {
 //Add1-1----------------------
 		if(v==btn){
 			if(!msgtv.getText().toString().trim().equals("")){
-				addMessage(msgtv.getText().toString(), email, friend, DateUtil.getNow("yyyy-MM-dd HH:mm:ss"), true);
+				addMessage(msgtv.getText().toString(), email, friend,
+						DateUtil.getNow("yyyy-MM-dd HH:mm:ss"), true);
 				msgtv.setText("");
 			}
 		}
-
 //end-----------------------
 	}
 	
@@ -205,8 +222,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 				temp.put("value", friend);
 				list.add(temp);
 				
-
-				Log.d("ChatActivity", "ip="+serverIp);
+				
 				String result = HttpUtil.sendHttpPost(serverIp, serverHttpPort, list);
 				
 				Log.d("kkang", result);

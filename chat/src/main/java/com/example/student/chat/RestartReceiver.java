@@ -13,20 +13,26 @@ public class RestartReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if(!isMyService(context)){
-            context.startService(new Intent(context, ChattingService.class));
-        }
-    }
-    private boolean isMyService(Context context){
-        final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        final List<ActivityManager.RunningServiceInfo> rs = am.getRunningServices(100);
-        ActivityManager.RunningServiceInfo rsi = null;
-        for(int i=0; i<rs.size(); i++){
-            rsi = rs.get(i);
-            if(rsi.service.getClassName().equals("com.example.student.chat.ChattingService")){
-                return true;
+        //Alaram에 의해 주기적으로 실행되면서.. service 구동 상태 파악..
+        boolean isMyService=false;
+        ActivityManager am=(ActivityManager)
+                context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> rs=
+                am.getRunningServices(100);
+        ActivityManager.RunningServiceInfo rsi=null;
+        for(int i=0;i<rs.size();i++){
+            rsi=rs.get(i);
+            if(rsi.service.getClassName().equals(
+                    "com.example.student.chat.ChattingService")){
+                isMyService=true;
+                break;
             }
         }
-        return false;
+
+        if(!isMyService){
+            Intent intent1=new Intent(context,
+                    ChattingService.class);
+            context.startService(intent1);
+        }
     }
 }

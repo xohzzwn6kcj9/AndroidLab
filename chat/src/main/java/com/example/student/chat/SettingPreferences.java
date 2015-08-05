@@ -32,21 +32,25 @@ public class SettingPreferences extends PreferenceActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 //-----1 start--------------------------
-
+		//UI 출력.. 설정 내용 자동 저장..
 		addPreferencesFromResource(R.xml.settings);
 
-		loginId=(EditTextPreference)findPreference(PreferenceHelper.KEY_LOGIN_ID);
-		nickname=(EditTextPreference)findPreference(PreferenceHelper.KEY_NICKNAME);
-		serverIp=(EditTextPreference)findPreference(PreferenceHelper.KEY_SERVER_IP);
-		serverPort=(EditTextPreference)findPreference(PreferenceHelper.KEY_SERVER_PORT);
-		serverHttpPort=(EditTextPreference)findPreference(PreferenceHelper.KEY_SERVER_HTTP_PORT);
+		//설정 객체 획득..
+		loginId=(EditTextPreference)findPreference("LoginID");
+		nickname=(EditTextPreference)findPreference("Nickname");
+		serverIp=(EditTextPreference)findPreference("ServerIP");
+		serverPort=(EditTextPreference)findPreference("ServerPort");
+		serverHttpPort=(EditTextPreference)findPreference("ServerHttpPort");
 
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		//설정 변경 순간의 이벤트 처리..
+		//==>설정 내용 저장은 자동으로 해주지만.. 변경 순간 ui 변경은 우리가.
+		prefs= PreferenceManager.getDefaultSharedPreferences(this);
 		prefs.registerOnSharedPreferenceChangeListener(ospchlistener);
-		if(!prefs.getString(PreferenceHelper.KEY_LOGIN_ID, "").isEmpty()){
-			loginId.setSummary(prefs.getString(PreferenceHelper.KEY_LOGIN_ID, ""));
-		}
 
+		//초기 activity 실행시 설정 내용이 있다면 summary 변경..
+		if(!prefs.getString("LoginID","").equals("")){
+			loginId.setSummary(prefs.getString("LoginID",""));
+		}
 	  //-1 end-------------------------------------
 	    if(!prefs.getString("Nickname", "").equals(""))
 	    	nickname.setSummary(prefs.getString("Nickname", ""));
@@ -74,9 +78,6 @@ public class SettingPreferences extends PreferenceActivity {
 					myDialog.cancel();
 					Toast.makeText(SettingPreferences.this, "The email already exists.", Toast.LENGTH_SHORT).show();
 				}
-				else{
-					Toast.makeText(SettingPreferences.this, "Unexpected Error.", Toast.LENGTH_SHORT).show();
-				}
 			}
 	    	
 	    };
@@ -87,16 +88,21 @@ public class SettingPreferences extends PreferenceActivity {
 		
 		@Override
 		public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-			Log.e("kkang", "key="+key);
 			if(key.equals("LoginID")) {
-				Log.e("kkang", "login id changed. ");
 				//2 start ----------------------------------------
-				if(!prefs.getString(PreferenceHelper.KEY_LOGIN_ID, "").isEmpty()) {
-					loginId.setSummary(prefs.getString(PreferenceHelper.KEY_LOGIN_ID, ""));
-					myDialog = ProgressDialog.show(SettingPreferences.this, "", "wait...");
-					UserSettingThread thread = new UserSettingThread(prefs.getString("LoginID", ""), "", true);
+				if(!prefs.getString("LoginID","").equals("")) {
+					loginId.setSummary(prefs.getString("LoginID", ""));
+
+					//서버 연동..
+					myDialog = ProgressDialog.show(SettingPreferences.this,
+							"", "wait....", true, true);
+					UserSettingThread thread = new UserSettingThread(
+							prefs.getString("LoginID", ""), "", true);
 					thread.start();
+				}else {
+					loginId.setSummary("edit LoginID");
 				}
+
 				//2 end -----------------------------------------
 			} else if (key.equals("Nickname")) {
 
@@ -133,13 +139,13 @@ public class SettingPreferences extends PreferenceActivity {
 		}
 	};
 	//---3 start --------------------------------
+	//설정 이벤트 등록은 꼭 필요 없는 순간 등록해제해야..
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		prefs.unregisterOnSharedPreferenceChangeListener(ospchlistener);
 	}
-
 
 	//---3 end--------------------------------------
 	
@@ -193,25 +199,20 @@ public class SettingPreferences extends PreferenceActivity {
 				temp.put("value", "1");
 				list.add(temp);
 //------------ 3 start ---------------------------------------				
-
-				String result = HttpUtil.sendHttpPost(
-						prefs.getString(PreferenceHelper.KEY_SERVER_IP, ""),
-						prefs.getString(PreferenceHelper.KEY_SERVER_HTTP_PORT, ""),
+				String result=HttpUtil.sendHttpPost(
+						prefs.getString("ServerIP",""),
+						prefs.getString("ServerHttpPort",""),
 						list);
-				Log.d("kkang", "result="+result);
 				if(result.equals("OK")){
 					msg.what=1;
 					handler.sendMessage(msg);
-				}
-				else if(result.equals("EXISTS")){
+				}else if(result.equals("EXIST")){
 					msg.what=2;
 					handler.sendMessage(msg);
-				}
-				else{
+				}else {
 					msg.what=0;
 					handler.sendMessage(msg);
 				}
-
 //--------4 end ------------------------------------------------
 			} catch (Exception e) {
 				Log.d("kkang", "Exception : " + e.getMessage());
