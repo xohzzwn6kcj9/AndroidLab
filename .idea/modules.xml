@@ -5,7 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidLab.iml" filepath="$PROJECT_DIR$/AndroidLab.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/chat/chat.iml" filepath="$PROJECT_DIR$/chat/chat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lbs/lbs.iml" filepath="$PROJECT_DIR$/lbs/lbs.iml" />
       <module fileurl="file://$PROJECT_DIR$/sms/sms.iml" filepath="$PROJECT_DIR$/sms/sms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stock/stock.iml" filepath="$PROJECT_DIR$/stock/stock.iml" />
     </modules>
   </component>
 </project>

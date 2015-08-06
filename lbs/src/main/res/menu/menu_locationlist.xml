@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_locationlist_add"
+        android:title="반경설정"
+        android:icon="@android:drawable/ic_menu_add"/>
+    <item
+        android:id="@+id/menu_locationlist_history"
+        android:title="History 보기"
+        android:icon="@android:drawable/ic_menu_recent_history"/>
+    <item
+        android:id="@+id/menu_locationlist_settings"
+        android:title="설정하기"
+        android:icon="@android:drawable/ic_menu_manage"/>
+
+</menu>

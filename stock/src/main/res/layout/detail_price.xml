@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		>
+		<RelativeLayout android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+			<ImageView android:id="@+id/detail_price_img1"
+				android:layout_width="wrap_content" android:layout_alignParentLeft="true"
+				android:layout_height="wrap_content" android:src="@drawable/arrow1_w" />
+			<TextView android:id="@+id/detail_price_text1"
+				android:layout_width="wrap_content" android:layout_toRightOf="@id/detail_price_img1"
+				android:layout_height="wrap_content" android:text="삼성전자" />
+
+			<ImageView android:id="@+id/detail_price_img2"
+				android:layout_width="wrap_content" android:layout_alignParentRight="true"
+				android:layout_height="wrap_content" android:src="@drawable/arrow1_e" />
+			<TextView android:id="@+id/detail_price_text2"
+				android:layout_width="wrap_content" android:layout_toLeftOf="@id/detail_price_img2"
+				android:layout_height="wrap_content" android:text="아시아나항공" />
+		</RelativeLayout>
+		<TextView android:layout_width="fill_parent" android:gravity="center_horizontal"
+			android:layout_height="wrap_content" android:text="현대차(005380)" />
+
+	</LinearLayout>
+	<TableLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:stretchColumns="2">
+		<TableRow>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="160,000"
+				android:textColor="#FF0000" android:layout_span="2" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="전일"
+				android:gravity="center_horizontal" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="158,000" />
+		</TableRow>
+		<TableRow>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="2,000"
+				android:textColor="#FF0000" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="1.27"
+				android:textColor="#FF0000" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="시가"
+				android:gravity="center_horizontal" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="160,000" />
+		</TableRow>
+	</TableLayout>
+	<TableLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:stretchColumns="1,3"
+		>
+		<TableRow>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="고가" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="160,000"
+				android:gravity="right" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="거래량"
+				android:paddingLeft="5px" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="553,972"
+				android:gravity="right" />
+		</TableRow>
+		<TableRow>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="저가" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="158,000"
+				android:gravity="right" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="거래대금"
+				android:paddingLeft="5px" />
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="88,279백만"
+				android:gravity="right" />
+		</TableRow>
+
+	</TableLayout>
+
+
+	<FrameLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_weight="1">
+
+		<WebView
+			android:id="@+id/detail_price_webview"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:visibility="invisible"
+			/>
+
+		<ListView android:id="@+id/detail_price_list"
+			android:layout_width="fill_parent" android:layout_height="fill_parent" />
+
+
+	</FrameLayout>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="horizontal"
+		>
+		<Button android:id="@+id/detail_price_bt1"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_weight="1" android:text="호가" />
+		<Button android:id="@+id/detail_price_bt2"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_weight="1" android:text="차트" />
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_weight="1"
+			android:text="일별" />
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_weight="1"
+			android:text="체결" />
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_weight="1"
+			android:text="거래원" />
+	</LinearLayout>
+
+</LinearLayout>

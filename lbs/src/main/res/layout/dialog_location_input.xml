@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:text="반경이름" />
+	<EditText android:id="@+id/input_name" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:text="반경" />
+	<RadioGroup android:id="@+id/radiogroup"
+		android:orientation="horizontal" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_gravity="fill">
+
+
+		<RadioButton android:id="@+id/m500" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="500M" />
+
+
+		<RadioButton android:id="@+id/m1000" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="1K" />
+
+
+		<RadioButton android:id="@+id/m5000" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="5K" />
+
+
+	</RadioGroup>
+
+</LinearLayout>

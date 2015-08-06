@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	>
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+		>
+		<TextView android:id="@+id/main_name"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" 
+			android:textStyle="bold"
+			android:textSize="20px"
+			android:textColor="#FFF"/>
+		<TextView android:id="@+id/main_totalVolumn"
+		    android:textColor="#FFF"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
+
+	</LinearLayout>
+	<!-- start 1 ################## -->
+	<com.example.student.stock.BarGraphView
+		android:id="@+id/main_bar"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"/>
+	
+	<!-- end 1 ################## -->
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="0dp" android:layout_height="wrap_content"
+		android:layout_weight="1" 
+		
+		>
+		<com.example.student.stock.StockPriceTextView android:id="@+id/main_price"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" 
+			android:textStyle="bold"
+			android:layout_gravity="right"/>
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_gravity="right">
+			<com.example.student.stock.StockPriceTextView android:id="@+id/main_changePrice"
+				android:layout_width="fill_parent" android:layout_height="wrap_content" 
+				android:padding="6dip"
+				
+				/>
+			<com.example.student.stock.StockPriceTextView android:id="@+id/main_rate"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

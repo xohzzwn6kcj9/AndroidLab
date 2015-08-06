@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">lbs</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_location_list">LocationListActivity</string>
+    <string name="title_activity_password_setting">PasswordSettingActivity</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_setting_main">SettingMainActivity</string>
+    <string name="title_activity_smsreceiver_setting">SMSReceiverSettingActivity</string>
+</resources>

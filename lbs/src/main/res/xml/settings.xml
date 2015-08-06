@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<CheckBoxPreference android:key="isService"
+		android:title="Service On/Off" 
+		android:summary="Location 서비스 On/Off"
+		android:defaultValue="true" />
+	
+	<PreferenceScreen
+		android:title="SMS 대상자 선정" android:summary="Location 이탈시 SMS 알림을 받을 대상자 선정">
+		<intent android:targetPackage="com.example.student.lbs"
+			android:targetClass="com.example.student.lbs.SMSReceiverSettingActivity" />
+	</PreferenceScreen>
+
+	<PreferenceScreen 
+		android:title="Password 변경" 
+		android:summary="기존 Password 를 변경합니다.">
+		<intent android:targetPackage="com.example.student.lbs"
+			android:targetClass="com.example.student.lbs.PasswordSettingActivity" />
+	</PreferenceScreen>	
+	
+
+</PreferenceScreen>
+

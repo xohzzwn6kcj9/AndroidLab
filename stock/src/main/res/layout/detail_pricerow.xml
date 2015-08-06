@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:stretchColumns="1">
+	<TableRow>
+		<TextView android:id="@+id/detail_price_row_text1" 
+			android:layout_width="100px" android:layout_height="wrap_content" android:gravity="right"/>
+		<TextView android:id="@+id/detail_price_row_text2"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" 
+			android:textColor="#FF0000" android:layout_gravity="center_horizontal" android:paddingLeft="20px" android:paddingRight="20px"/>
+		<TextView android:id="@+id/detail_price_row_text3"
+			android:layout_width="100px" android:layout_height="wrap_content" android:gravity="right"/>
+	</TableRow>
+</TableLayout>

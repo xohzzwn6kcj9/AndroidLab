@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="#FFF" android:gravity="center_vertical">
+	<LinearLayout 
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:gravity="center">
+		<ImageView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:src="@drawable/intro" />
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="wrap_content" android:layout_height="fill_parent"
+			android:gravity="center_vertical">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textColor="#000"
+				android:textSize="20px" android:textStyle="bold" android:text="Safe Line" />
+
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textColor="#000"
+				android:textSize="10px" android:textStyle="bold" android:text="version 1.0.0" />
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:gravity="center">
+		<TextView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textColor="#000"
+			android:textSize="15px" android:textStyle="bold" android:text="PASSWORD" />
+		<EditText android:id="@+id/intro_pass" android:layout_width="100px"
+			android:layout_height="wrap_content" android:singleLine="true"
+			android:password="true" />
+		<Button android:id="@+id/intro_bt" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="확인" />
+	</LinearLayout>
+</LinearLayout>
